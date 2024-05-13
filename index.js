@@ -1,14 +1,15 @@
 const express = require("express");
 const connectDB = require("./db");
+const userRouter = require("./src/components/user/routes/userRoutes");
 const app = express();
 
-const port = 3000;
+require("dotenv").config;
+
+const port = process.env.PORT || 5000;
 
 connectDB();
 
-app.get("/", (req, res) => {
-  res.send("Hell World");
-});
+app.use("/api/users", userRouter);
 
 app.listen(port, () => {
   console.log("App is listening on port ${port}");
