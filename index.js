@@ -10,6 +10,7 @@ const port = process.env.PORT || 5000;
 
 connectDB();
 
+app.use(express.json());
 app.use("/api/users", userRouter);
 app.use(notFound);
 app.use(errorHandler);
