@@ -26,7 +26,7 @@ const login = async (req, res) => {
   const { username, password } = req.body;
 
   const user = await User.findOne({ username });
-  if (user && (await user.matchPasswords(password))) {
+  if (user && (await user.comparePassword(password))) {
     res.json({
       _id: user._id,
       name: user.name,
@@ -40,4 +40,8 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { register, login };
+const getUserProfile = asyncHandler(async (req, res) => {
+  res.send(req.user);
+});
+
+module.exports = { register, login, getUserProfile };
